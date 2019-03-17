@@ -10,8 +10,15 @@ class HomePage extends StatefulWidget{
 }
 
 class _homePageState extends State<HomePage>{
-  //String name;
+  //String name = "";
+  List<Widget> children = <Widget>[];
   GlobalKey<FormState> formKey = new GlobalKey();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    children.add(buildInputWidget());
+  }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -19,7 +26,9 @@ class _homePageState extends State<HomePage>{
       appBar: AppBar(
         title: new Text('Get an image of your name'),
       ),
-      body: buildInputWidget(),
+      body: new Column(
+        children: children,
+      )
     );
   }
 
@@ -27,6 +36,11 @@ class _homePageState extends State<HomePage>{
     if(formKey.currentState.validate()){
       //formKey.currentState.save();
       print(input);
+      if(input!=null){
+        setState(() {
+          children.add(buildCircularAvatar(input));
+        });
+      }
     }
   }
 
@@ -49,8 +63,8 @@ class _homePageState extends State<HomePage>{
     );
   }
 
-  Widget buildCircularAvatar(){
-    return new Avatar();
+  Widget buildCircularAvatar(String input){
+    return new Avatar(input);
   }
 
 
