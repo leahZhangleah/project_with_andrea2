@@ -20,7 +20,28 @@ class _avatarState extends State<Avatar>{
     // TODO: implement build
     return new Column(
       children: <Widget>[
-        getAvatarWidget(widget.input),
+        Container(
+          child: new ClipOval(
+            child: getAvatarWidget(widget.input),
+          ),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.blue,
+              width: 3.0,
+            ),
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+                colors: <Color>[
+                  Colors.transparent,
+                  Colors.yellow[200]
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+            ),
+          ),
+          width: 100.0,
+          height: 100.0,
+        ),
         new Text('Courtesy of Robohash')
       ],
     );
